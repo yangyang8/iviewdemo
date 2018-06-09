@@ -225,7 +225,7 @@
                 </div>
             </i-col>
         </Row>
-        <Modal v-model="visible" title="修改密码" @on-ok="updatePasswordOk">
+        <Modal v-model="visible" :mask-closable="false" title="修改密码" @on-ok="updatePasswordOk">
                 <h3>原密码:</h3><Input type="password" v-model="orginPassword" size="large" placeholder="输入原密码"></Input>
                 <br>
                 <br>

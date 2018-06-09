@@ -14,7 +14,10 @@
                 </i-input>
             </Form-item>
             <Form-item>
-                <i-button type="primary" style="margin:10px;width:280px" v-on:click="handleSubmit('formInline')">登录</i-button>
+                <i-button type="primary" v-on:click="handleSubmit('formInline')">登录</i-button>
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                <i-button type="primary" v-on:click="registerUser()">注册</i-button>
             </Form-item>
         </i-form>
     </div>
@@ -23,6 +26,14 @@
     import axios from 'axios';
 
     export default {
+        //给body设置class属性
+        beforeCreate: function() {
+            document.getElementsByTagName("body")[0].className="active";
+        },
+        //在这个页面结束后进行移除这个属性，不让他给后面的属性造成问题
+        beforeDestroy: function() {
+            document.body.removeAttribute("class","active");
+        },
         data () {
             return {
                 formInline: {
@@ -37,7 +48,8 @@
                         { required: true, message: '请填写密码', trigger: 'blur' },
                         { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
                     ]
-                }
+                },
+                visable:false
             }
         },
         methods: {
@@ -66,7 +78,16 @@
                         this.$Message.error('表单验证失败!');
                     }
                 })
+            },
+            //注册方法的使用
+            registerUser(){
+                
+                //this.visable=true;
+                //进行中转到注册的页面
+                 this.$router.push({path:"/registerUser"});
             }
+        },mounteds(){
+            
         }
     }
 </script>
@@ -93,7 +114,7 @@
                    
     }
 
-    body{
+    .active{
         background-image:url("../asset/yhl05.jpg");
         background-repeat: no-repeat; /*不重复图片*/
         background-attachment: fixed;/* 固定图片*/
