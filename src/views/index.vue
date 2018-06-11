@@ -59,7 +59,7 @@
                
                 if (valid) {
                         
-                        //this.$router.push({path:"/mune?username="+this.formInline.user});
+                        this.$router.push({path:"/mune?username="+this.formInline.user});
                         axios.post("http://localhost:8082/System/login.action",this.formInline)
                         .then(response=>{
                                // alert(response.data);

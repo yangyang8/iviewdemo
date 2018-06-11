@@ -60,7 +60,7 @@
                         </template>
                         <Menu-item name="1-1">用户管理</Menu-item>
                         <Menu-item name="1-2">角色管理</Menu-item>
-                        <Menu-item name="/role/pageRoleList.action">权限管理</Menu-item>
+                        <Menu-item name="/roleList">权限管理</Menu-item>
                     </Submenu>
                     <Submenu name="2">
                         <template slot="title">
@@ -124,7 +124,7 @@
                             <Icon type="ios-analytics"></Icon>
                             数据统计
                         </template>
-                        <Menu-item name="4-1">登录人数统计</Menu-item>
+                        <Menu-item name="/LoginNumData">登录人数统计</Menu-item>
                         <Menu-item name="4-2">产品销售统计</Menu-item>
                         <Menu-item name="4-3">用户行为统计</Menu-item>
                         <Menu-item name="4-4">客户分布统计</Menu-item>
@@ -274,11 +274,13 @@
                 
                 alert(name);
                 //得到选择的mune-item,那么则我们的服务器发送请求来获取数据
-                if(name=="/role/pageRoleList.action"){
-                    this.$router.push({path:"/roleList"});
+                if(name=="/roleList"){
+                    //this.$router.push({path:"/roleList"});
+                     alert(name);
                 }else{
-                    alert(baseURL+name);
+                    alert("哈哈...");
                 }
+                 this.$router.push({path:name});
             }
         },mounted(){
             this.username=this.$route.query.username;

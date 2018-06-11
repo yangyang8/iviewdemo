@@ -30,12 +30,11 @@
             </FormItem>
             <br>
             <FormItem label="头像" style="margin:10px;width:180px">
-                <Upload :before-upload="handleUpload"
-                        action="">
+                <Upload :before-upload="handleUpload" v-model="formValidate.file"
+                        action="//localhost:8082/System/registerUser.action">
                         <Button type="ghost" icon="ios-cloud-upload-outline">
                             {{ formValidate.file.name !=null ?formValidate.file.name:'上传头像' }}</Button>
                 </Upload>
-                
             </FormItem>
             
             <FormItem label="性别" prop="gender" style="margin:10px;width:180px">
@@ -104,6 +103,7 @@ import axios from 'axios';
                         //this.$router.push({path:"/mune?username="+this.formValidate.name});
                         //给我们的前台发送注册数据的请求
                         //axios.post("http://localhost:8082/System/registerUser.action",this.formValidate)
+                        alert(this.formValidate.file.name+"::"+this.formValidate.file.uri);
                          this.$http.post("http://localhost:8082/System/registerUser.action",this.formValidate
                            )
                         .then(response=>{
