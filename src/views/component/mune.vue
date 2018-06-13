@@ -8,15 +8,16 @@
         padding: 10px 15px 0;
     }
     .layout-content{
-        height: 780px;
+        height: 1500px;
         margin: 15px;
         overflow: hidden;
-        background: #fff;
+        background:ghostwhite;
         border-radius: 4px;
     }
     .layout-content-main{
         padding: 10px;
     }
+    /*version*/
     .layout-copy{
         text-align: center;
         padding: 10px 0 20px;
@@ -235,7 +236,8 @@
     </div>
 </template>
 <script>
-
+    import axios from 'axios';
+    axios.defaults.withCredentials=true;
     export default {
         data(){
             return {
@@ -259,10 +261,21 @@
                           this.visible=true;
                         
                 }else{
-                    //alert("退出操作");
-                    //进行跳转到我们的登录页面
+                    alert("退出操作");
+                   
                     //先javaweb服务器发送请求，然后清空Session当中数据
-                    this.$router.push({path:"/index"});
+                     axios.post('http://localhost:8082/System/LoginOut.action',{},{
+                          withCredentials : true
+                     }).then((response) => {
+                            // 请求成功回调
+                                //进行跳转到我们的登录页面
+                                //this.$router.push({path:"/index"});
+                                alert("注销登录成功...");
+                        }, (error) => {
+                            // 请求失败回调
+                              alert("注销登录失败...")
+                        });
+                        this.$router.push({path:"/"});
                    // this.$router.push({path:"/mune
                 }
             },
@@ -285,6 +298,8 @@
         },mounted(){
             this.username=this.$route.query.username;
             //alert(this.$route.query)
+            //设置选中的为系统登录统计相关
+            this.menuSelect("/LoginNumData");
         }
     }
 </script>

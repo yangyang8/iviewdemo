@@ -3,8 +3,8 @@
         <i-form ref="formInline" :model="formInline" :rules="ruleInline" 
         class="form">
             <h2 id="h2">系统登录</h2>
-            <Form-item prop="user" style="margin:10px;width:280px">
-                <i-input type="text" v-model="formInline.user" placeholder="Username">
+            <Form-item prop="name" style="margin:10px;width:280px">
+                <i-input type="text" v-model="formInline.name" placeholder="Username">
                     <Icon type="ios-person-outline" slot="prepend"></Icon>
                 </i-input>
             </Form-item>
@@ -37,11 +37,11 @@
         data () {
             return {
                 formInline: {
-                    user: '',
+                    name: '',
                     password: ''
                 },
                 ruleInline: {
-                    user: [
+                    name: [
                         { required: true, message: '请填写用户名', trigger: 'blur' }
                     ],
                     password: [
@@ -59,18 +59,22 @@
                
                 if (valid) {
                         
-                        this.$router.push({path:"/mune?username="+this.formInline.user});
+                        //this.$router.push({path:"/mune?username="+this.formInline.user});
                         axios.post("http://localhost:8082/System/login.action",this.formInline)
                         .then(response=>{
-                               // alert(response.data);
+                               //alert(response.data);
                                /*var data=response.data;
                                for(var i=0;i<data.length;i++){
                                    alert(data[i].user)
                                }*/
                                 //console.log(response);
-                                this.$router.push({path:"/mune?username="+this.formInline.user});
-                                //window.location.reload();
-                                this.$Message.success('提交成功!');
+                                if(response.data=='success'){
+                                    this.$router.push({path:"/mune?username="+this.formInline.name});
+                                    //window.location.reload();
+                                    this.$Message.success('提交成功!');
+                                }else{
+                                    this.$Message.error('系统登录失败!');
+                                }
                             },err =>{
                                     this.$Message.error('表单验证失败!');
                             });

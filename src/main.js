@@ -18,6 +18,8 @@ import vueResource from 'vue-resource';
 import echarts from "./libs/echarts";
 //这一步很是关键
 Vue.prototype.$echarts = echarts
+
+
 //创建组件
 //import Home from "./views/component/home.vue";
 //import New from "./views/component/news.vue";
